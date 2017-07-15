@@ -1,0 +1,90 @@
+﻿@model IEnumerable<Cobra_onboarding.Models.Person>
+
+@{
+    ViewBag.Title = "Customer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div ng-controller="Customers">
+    <div class="row">
+        <h2 class="col-xs-2">Customers</h2>
+    </div>
+    <div class="row">
+        <button class="btn btn-primary" style="margin-bottom:1em;margin-left:1em;"
+                data-toggle="modal" data-target="#PopUpModal" > 
+            <span class="glyphicon glyphicon-plus"></span> Add 
+        </button>
+    </div>
+    <div class="row">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            Name 
+                            <a href="#" ng-click="sortTable('Name')">
+                                <i class="fa fa-fw fa-sort" ng-show="sortType.reverse==null"></i>
+                                <i class="fa fa-fw fa-caret-down" ng-show="sortType.reverse==true"></i>
+                                <i class="fa fa-fw fa-caret-up" ng-show="sortType.reverse==false"></i>
+                            </a>
+                        </th> @*fa-fw fa-sort*@ 
+                        <th>
+                            Address1
+                            <a href="#" ng-click="sortTable('Address1')">
+                                <i class="fa fa-fw fa-sort" ng-show="sortType.reverse==null"></i>
+                                <i class="fa fa-fw fa-caret-down" ng-show="sortType.reverse==true"></i>
+                                <i class="fa fa-fw fa-caret-up" ng-show="sortType.reverse==false"></i>
+                            </a>
+                        </th>
+                        <th>
+                            Address2
+                            <a href="#" ng-click="sortTable('Address2')">
+                                <i class="fa fa-fw fa-sort" ng-show="sortType.reverse==null"></i>
+                                <i class="fa fa-fw fa-caret-down" ng-show="sortType.reverse==true"></i>
+                                <i class="fa fa-fw fa-caret-up" ng-show="sortType.reverse==false"></i>
+                            </a>
+                        </th>
+                        <th>
+                            Town/City
+                            <a href="#" ng-click="sortTable('City')">
+                                <i class="fa fa-fw fa-sort" ng-show="sortType.reverse==null"></i>
+                                <i class="fa fa-fw fa-caret-down" ng-show="sortType.reverse==true"></i>
+                                <i class="fa fa-fw fa-caret-up" ng-show="sortType.reverse==false"></i>
+                            </a>
+                        </th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="c in customers | orderBy : sortType.type : sortType.reverse">
+                        <td>{{c.Name}}</td>
+                        <td>{{c.Address1}}</td>
+                        <td>{{c.Address2}}</td>
+                        <td>{{c.City}}</td>
+                        <td>
+                            @*<a href="#" data-toggle="modal" data-target="#PopUpModal" ng-click="selectCustomer(c)" >[Edit]</a>*@
+                            <button class="btn btn-primary" data-toggle="modal" data-target="#PopUpModal" ng-click="selectCustomer(c)">
+                                <span class="glyphicon glyphicon-edit"></span> Edit
+                            </button>
+                            @*<a href="#" ng-click="deleteCustomer(c)">[Delete]</a>*@
+                            <button class="btn btn-primary" ng-click="deleteCustomer(c)">
+                                <span class="glyphicon glyphicon-trash"></span> Delete
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!--Popup Modal: Adding new Customer-->
+            @Html.Partial("~/Views/Shared/PopupModal.cshtml")
+            <!--End Popup Modal-->
+
+            <!--Popup Modal: Error Message-->
+            @Html.Partial("~/Views/Shared/Error.cshtml")
+            <!--End Popup Modal-->
+
+        </div>
+    </div>
+
+    
+</div>

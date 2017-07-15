@@ -1,0 +1,113 @@
+﻿
+@{
+    Layout = null;
+}
+
+<div id="PopUpModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content col-sm-8">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" ng-click="reset()">&times;</button>
+                <h4 class="modal-title">Customer</h4>
+            </div>
+            <div class="modal-body">
+                @*<p>Some text in the modal.</p>*@
+                <form name="customerForm">
+                    <div class="form-group row">
+                        <div class="col-sm-3">
+                            <label class="form-group">Name</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <input-Text validation="validations[0]" type="name"></input-Text>
+                            @*<input id="name" name="name" class="form-control" type="text" ng-model="name" required />
+                            <span class="badge alert-danger" ng-show="customerForm.name.$invalid">Required</span>
+                                                        
+                            <span class="badge alert-danger" ng-show="validationsForNullOrEmpty[0]!=null && !validationsForNullOrEmpty[0]">
+                                Required
+                            </span>
+                            <span class="badge alert-danger" ng-show="validationsForAlphaNumeric[0]!=null && !validationsForAlphaNumeric[0]">
+                                Required AlphaNumeric
+                            </span>*@
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm-3">
+                            <label class="form-group">Address1</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <input-Text validation="validations[1]" type="address1"></input-Text>
+                            @*<input id="address1" name="address1" class="form-control" type="text" ng-model="address1" required />
+                            <span class="badge alert-danger" ng-show="customerForm.address1.$invalid">Required</span>
+
+                            <span class="badge alert-danger" ng-show="validationsForNullOrEmpty[1]!=null && !validationsForNullOrEmpty[1]">
+                                Required
+                            </span>
+                            <span class="badge alert-danger" ng-show="validationsForAlphaNumeric[1]!=null && !validationsForAlphaNumeric[1]">
+                                Required AlphaNumeric
+                            </span>*@
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm-3">
+                            <label class="form-group">Address2</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <input-Text validation="validations[2]" type="address2"></input-Text>
+                            @*<input id="address2" class="form-control" type="text" ng-model="address2" />
+                            <span class="badge alert-danger" ng-show="validationsforalphanumeric[2]!=null && !validationsforalphanumeric[2]">
+                                required alphanumeric
+                            </span>*@
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm-3">
+                            <label class="form-group">City</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <input-Text validation="validations[3]" type="city"></input-Text>
+                            @*<input id="city" name="city" class="form-control" type="text" ng-model="city" required />
+                            <span class="badge alert-danger" ng-show="customerForm.city.$invalid">Required</span>
+                            <span class="badge alert-danger" ng-show="validationsForNullOrEmpty[2]!=null && !validationsForNullOrEmpty[2]">
+                                Required
+                            </span>
+                            <span class="badge alert-danger" ng-show="validationsForAlphaNumeric[3]!=null && !validationsForAlphaNumeric[2]">
+                                Required AlphaNumeric
+                            </span>*@
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="row modal-footer">
+                <!-- Show the this div when id =='' in case of add new customer -->
+                @*<div class="col-sm-2" ng-show="id==''"> 
+                    <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="addNewCustomer()">Save</button>
+                </div>*@
+                <div class="col-sm-2" ng-show="id==''">
+                    <button type="button" class="btn btn-success" ng-click="addNewCustomer()">
+                        <span class="glyphicon glyphicon-floppy-disk"></span> Save
+                    </button>
+                </div>
+                <!-- Show the this div when id !='' in case of edit a customer -->
+                @*<div class="col-sm-2" ng-show="id!=''">
+                    <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="saveEditedCustomer()">Save</button>
+                </div>*@
+                <div class="col-sm-2" ng-show="id!=''">
+                    <button type="button" class="btn btn-success" ng-click="saveEditedCustomer()">
+                        <span class="glyphicon glyphicon-floppy-disk"></span> Save
+                    </button>
+                </div>
+                <div class="col-sm-2 col-sm-offset-7">
+                    <button type="button" class="btn btn-warning" data-dismiss="modal" ng-click="reset()">
+                        <span class="glyphicon glyphicon-remove"></span> Close
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

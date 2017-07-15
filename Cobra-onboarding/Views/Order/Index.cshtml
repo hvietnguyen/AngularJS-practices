@@ -1,0 +1,86 @@
+﻿@{
+    ViewBag.Title = "Order";
+}
+
+<div ng-controller="Orders">
+    <div class="row">
+        <h2 class="col-xs-2">Orders</h2>
+    </div>
+    <div class="row">
+        <button class="btn btn-primary" style="margin-bottom:1em;margin-left:1em;"
+                data-toggle="modal" data-target="#PopUpModalOrders" ng-click="displayModal()">
+            <span class="glyphicon glyphicon-plus"></span> Add
+        </button>
+    </div>
+    <div class="row">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <tr>
+                    <th>
+                        Order Id
+                        <a href="#" ng-click="sortTable('OrderId')">
+                            <i class="fa fa-fw fa-sort" ng-show="sortType.reverse==null"></i>
+                            <i class="fa fa-fw fa-caret-down" ng-show="sortType.reverse==true"></i>
+                            <i class="fa fa-fw fa-caret-up" ng-show="sortType.reverse==false"></i>
+                        </a>
+                    </th>
+                    <th>
+                        Date
+                        <a href="#" ng-click="sortTable('Date')">
+                            <i class="fa fa-fw fa-sort" ng-show="sortType.reverse==null"></i>
+                            <i class="fa fa-fw fa-caret-down" ng-show="sortType.reverse==true"></i>
+                            <i class="fa fa-fw fa-caret-up" ng-show="sortType.reverse==false"></i>
+                        </a>
+                    </th>
+                    <th>
+                        Customer Name
+                        <a href="#" ng-click="sortTable('Name')">
+                            <i class="fa fa-fw fa-sort" ng-show="sortType.reverse==null"></i>
+                            <i class="fa fa-fw fa-caret-down" ng-show="sortType.reverse==true"></i>
+                            <i class="fa fa-fw fa-caret-up" ng-show="sortType.reverse==false"></i>
+                        </a>
+                    </th>
+                    <th>
+                        Product
+                        <a href="#" ng-click="sortTable('ProductName')">
+                            <i class="fa fa-fw fa-sort" ng-show="sortType.reverse==null"></i>
+                            <i class="fa fa-fw fa-caret-down" ng-show="sortType.reverse==true"></i>
+                            <i class="fa fa-fw fa-caret-up" ng-show="sortType.reverse==false"></i>
+                        </a>
+                    </th>
+                    <th>
+                        Price
+                        <a href="#" ng-click="sortTable('Price')">
+                            <i class="fa fa-fw fa-sort" ng-show="sortType.reverse==null"></i>
+                            <i class="fa fa-fw fa-caret-down" ng-show="sortType.reverse==true"></i>
+                            <i class="fa fa-fw fa-caret-up" ng-show="sortType.reverse==false"></i>
+                        </a>
+                    </th>
+                    <th>Action</th>
+                </tr>
+                <tr ng-repeat="o in orders | orderBy : sortType.type : sortType.reverse">
+                    <td>{{o.OrderId}}</td>
+                    <td>{{o.Date | date: 'dd-MM-yyyy'}}</td>
+                    <td>{{o.Name}}</td>
+                    <td>{{o.ProductName}}</td>
+                    <td>{{o.Price | currency}}</td>
+                    <td>
+                        @*<a href="#" data-toggle="modal" data-target="#PopUpModalOrders" ng-click="selectOrder(o)">[Edit]</a>*@
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#PopUpModalOrders" ng-click="selectOrder(o)">
+                            <span class="glyphicon glyphicon-edit"></span> Edit
+                        </button>
+                        @*<a href="#" ng-click="deleteOrder(o)">[Delete]</a>*@
+                        <button class="btn btn-primary" ng-click="deleteOrder(o)">
+                            <span class="glyphicon glyphicon-trash"></span> Delete
+                        </button>
+                    </td>
+                </tr>
+            </table>
+
+            <!--Popup Modal: Adding new Customer-->
+            @Html.Partial("~/Views/Shared/PopupModalOrders.cshtml")
+            <!--End Popup Modal-->
+
+        </div>
+    </div>
+</div>

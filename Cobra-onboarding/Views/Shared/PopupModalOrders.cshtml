@@ -1,0 +1,120 @@
+﻿
+@{
+    Layout = null;
+}
+
+<div id="PopUpModalOrders" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content col-sm-8">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" ng-click="reset()">&times;</button>
+                <h4 class="modal-title">Order</h4>
+            </div>
+            <div class="modal-body">
+                @*<p>Some text in the modal.</p>*@
+                <form name="orderForm">
+                    <div class="form-group row">
+                        <div class="col-sm-3">
+                            <label class="form-group">OrderId</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <input name="orderId" class="form-control" type="text" ng-model="orderId" disabled/>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm-3">
+                            <label class="form-group">Date</label>  
+                        </div>
+                        <div class="col-sm-8">
+                            <input name="date" class="form-control" type="date" ng-model="date" required>
+                            <span class="badge alert-danger" ng-show="orderForm.date.$invalid">
+                                Required
+                            </span>
+                            <span class="badge alert-danger" ng-show="validations[0]!=null && !validations[0]">
+                                Required
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm-3">
+                            <label class="form-group">Customer</label>
+                        </div>
+                        <div class="col-sm-8">
+                            @*<input class="form-control" type="text" ng-model="address2" />*@
+                            @*<select name="customers" class="form-control" ng-model="selectedCustomer" 
+                                    ng-options="x.Name for x in customers">
+                                <option value="">---Please Select---</option>
+                            </select>*@
+                            <select name="customers" class="form-control" ng-model="selectedCustomer"
+                                    ng-change="selectCustomerUpdate()">
+                                <option value="">---Please Select---</option>
+                                <option ng-repeat="c in customers" value="{{c}}" ng-selected="isCustomerSelected(c)">
+                                    {{c.Name}}
+                                </option>
+                            </select>
+                            <span class="badge alert-danger" ng-show="validations[1]!=null && !validations[1]">
+                                Required
+                            </span>
+                        </div>
+                        
+                    </div>
+
+                    <div class="form-group row" >
+                        <div class="col-sm-3">
+                            <label class="form-group">Product</label>
+                        </div>
+                        <div class="col-sm-8">
+                            @*<select name="products" class="form-control" ng-model="selectedProduct" 
+                                    ng-options="x.ProductName for x in products">
+                                <option value="">---Please Select---</option>
+                            </select>*@
+                            <select name="products" class="form-control" ng-model="selectedProduct" 
+                                    ng-change="selectProductUpdate()">
+                                <option value="">---Please Select---</option>
+                                <option ng-repeat="p in products" value="{{p}}" ng-selected="isProductSelected(p)">
+                                    {{p.ProductName}}
+                                </option>
+                            </select>
+                            <span class="badge alert-danger" ng-show="validations[2]!=null && !validations[2]">
+                                Required
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm-3">
+                            <label class="form-group">Price</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <span class="text-left">{{selectedProduct.Price | currency}}</span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="row modal-footer">
+                <!-- Show the this div when id =='' in case of add new customer -->
+                <div class="col-sm-2" ng-show="orderId==''">
+                    <button type="button" class="btn btn-success" ng-click="addNewOrder()">
+                        <span class="glyphicon glyphicon-floppy-disk"></span> Save
+                    </button>
+                </div>
+                <!-- Show the this div when id !='' in case of edit a customer -->
+                <div class="col-sm-2" ng-show="orderId!=''">
+                    <button type="button" class="btn btn-success" ng-click="saveEditedOrder()">
+                        <span class="glyphicon glyphicon-floppy-disk"></span> Save
+                    </button>
+                </div>
+                <div class="col-sm-2 col-sm-offset-7">
+                    <button type="button" class="btn btn-warning" data-dismiss="modal" ng-click="reset()">
+                        <span class="glyphicon glyphicon-remove"></span> Close
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
